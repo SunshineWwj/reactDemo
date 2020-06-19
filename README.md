@@ -1,6 +1,6 @@
 # reactDemo
 webpack+react+antd
 
-npm install
-npm run dev  //运行
-npm run build  //build
+npm install \n
+npm run dev  //运行\n
+npm run build  //build\n
