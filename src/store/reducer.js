@@ -1,48 +1,37 @@
 import { combineReducers } from "redux";
-const counter = (state, action) => {
-  console.log(state, action.data);
+import initState from "./state";
+import { uuid } from "../utils";
+const counter = (state = initState, action) => {
+  //   console.log(initState, action.data);
   switch (action.type) {
-    case "INCREMENT":
-      return { ...state, counter: state.counter + action.num };
+    case "INCREMENT": {
+      console.log(state);
+      return state + action.num;
+    }
     case "DECREMENT":
-      return { ...state, counter: state.counter - action.num };
-    case "ADDLIST":
-      return {
-        ...state,
-        todoList: action.data.list,
-      };
-    case "ADD_TODO":
-      return {
-        ...state,
-        todoList: state.todoList.concat(action.data),
-      };
-    case "DELETE_TODO":
-      return {
-        ...state,
-        todoList: state.todoList.filter((list) => list.id != action.data),
-      };
+      return state - action.num;
     default:
       return state;
   }
 };
-const todos = (state, action) => {
+const todoList = (state = initState, action) => {
   switch (action.type) {
+    case "ADDLIST":
+      return action.data.list;
     case "ADD_TODO":
-      return {
-        ...state,
-        todoList: state.todoList.concat({
-          name: "wwj3",
-          age: 27,
-          job: "coder3",
-        }),
-      };
+      return state.concat(action.data);
+    case "DELETE_TODO":
+      return state.filter((list) => list.id != action.data);
     default:
       return state;
   }
 };
 
-// export default combineReducers({
-//   counter,
-//   todos,
-// });
-export default counter;
+const list = combineReducers({
+  counter,
+  todoList,
+});
+export default combineReducers({
+  list,
+});
+// export default counter;

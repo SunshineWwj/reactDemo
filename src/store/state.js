@@ -1,4 +1,6 @@
 export default {
-  counter: 100,
-  todoList: [],
+  list: {
+    counter: 100,
+    todoList: [],
+  },
 };

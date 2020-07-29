@@ -24,12 +24,12 @@ class storeTest extends React.Component {
         <Button type="primary" onClick={this.props.addList}>
           list
         </Button>
-        {this.props.list.map((m, index) => (
+        {(this.props.list || []).map((m, index) => (
           <div key={index}>
             <Button onClick={() => this.props.deleteTodo(m.id)}>
               {m.name}{" "}
             </Button>
-            <span>{m.age} </span>
+            <span>{m.job} </span>
           </div>
         ))}
       </div>
@@ -38,8 +38,8 @@ class storeTest extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter,
-    list: state.todoList,
+    counter: state.list.counter,
+    list: state.list.todoList,
   };
 };
 const mapDispatchToProps = (dispatch) => {
