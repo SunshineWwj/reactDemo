@@ -12,6 +12,15 @@ class storeTest extends React.Component {
   constructor(props) {
     super(props);
     console.log(props.list);
+    this.state = {
+      fetchData: [],
+    };
+    console.log("aaaa");
+  }
+  componentDidMount() {
+    fetch("/api/data")
+      .then((res) => res.json())
+      .then((data) => this.setState({ fetchData: data }));
   }
   render() {
     return (
@@ -32,6 +41,15 @@ class storeTest extends React.Component {
             <span>{m.job} </span>
           </div>
         ))}
+        <div>
+          {this.state.fetchData.map((item) => (
+            <ul>
+              <li>{item.title}</li>
+              <li>{item.author}</li>
+              <li>{item.date}</li>
+            </ul>
+          ))}
+        </div>
       </div>
     );
   }

@@ -16,16 +16,18 @@ export const decrement = () => {
 
 export const addList = () => {
   count++;
-  return {
-    type: "ADDLIST",
-    data: {
-      list: [
-        { id: uuid(), name: `wwj${count}`, age: 25, job: "coder1" },
-        { id: uuid(), name: `wwj${count}`, age: 26, job: "coder2" },
-        { id: uuid(), name: `wwj${count}`, age: 27, job: "coder3" },
-      ],
-    },
-  };
+  fetch("/api/data")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data) {
+        return {
+          type: "ADDLIST",
+          data: {
+            list: data,
+          },
+        };
+      }
+    });
 };
 export const addTodo = () => {
   count++;
