@@ -12,6 +12,7 @@ import {
 import reducer from "./store/reducer";
 import state from "./store/state";
 import MenuPage from "./Menu";
+import Hooks from '../src/homeHooks/index'
 const store = createStore(reducer, state);
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <MenuPage />
+          {/* <Hooks/> */}
         </BrowserRouter>
       </Provider>
     );

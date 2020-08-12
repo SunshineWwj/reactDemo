@@ -55,6 +55,7 @@ const combineUrl = (pageUrl, url) => {
  */
 export class Routes {
   constructor(routes, pagePath) {
+      console.log('routes:',routes)
     Object.defineProperty(this, "pageUrl", {
       value: pagePath || "/",
       writable: true,

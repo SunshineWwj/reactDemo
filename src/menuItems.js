@@ -6,10 +6,10 @@ export const menus = [
     icon: "AppleOutlined",
     items: [
       {
-        title: "首页",
+        title: "Hooks",
         pinyin: "shouye",
         key: "dm1",
-        url: "/homeHooks",
+        url: "/hooks",  //浏览器中显示的路由
       },
       {
         title: "评分",
@@ -44,6 +44,12 @@ export const menus = [
         pinyin: "biaogeceshi",
         key: "dm6",
         url: "/tableQuery",
+      },
+      {
+        title: "refs学习",
+        pinyin: "refs",
+        key: "dm7",
+        url: "/refs",
       },
     ],
   },
