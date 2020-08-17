@@ -1,15 +1,21 @@
 import React from "react";
-import HomeHooks from "../homeHooks";
+import TestHooksAndClass from "../homeHooks";
 import Rate from "../rate";
+import HooksAll from "../homeHooks/HooksAllUse";
 import ReactRedux from "../ReactRedux";
 import { Routes } from "./routerManager";
 import TableQuery from "../TableQuery";
-import RefsDemo from '../RefsDemo'
+import RefsDemo from "../RefsDemo";
 const routes = new Routes({
   hooks: {
-    url: "/hooks", 
-    title: "主页",
-    component: HomeHooks,
+    url: "/hooks",
+    title: "Hooks和class比较",
+    component: TestHooksAndClass,
+  },
+  hooksUse: {
+    url: "/hooksUse",
+    title: "Hooks基本使用",
+    component: HooksAll,
   },
   rate: {
     url: "/rate",
@@ -33,7 +39,6 @@ const routes = new Routes({
   },
 });
 const routeKeys = Object.keys(routes);
-console.log('routeKeys:',routeKeys)
 const routeValue = Object.values(routes);
 routeValue.forEach((c, i) => {
   c.goPath = `/${routeKeys[i]}`;

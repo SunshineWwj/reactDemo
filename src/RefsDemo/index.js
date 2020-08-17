@@ -19,7 +19,10 @@ class FancyButton extends React.Component {
   state = {
     a: "aaaa",
   };
+  inputRef = React.createRef();
+
   onChange = (value, name) => {
+    console.log("ref:", this.inputRef);
     this.setState({ a: value });
     console.log(value, name);
   };
@@ -29,6 +32,7 @@ class FancyButton extends React.Component {
       <div>
         请输入文字：
         <InputComponent
+          ref={(ref) => (this.inputRef = ref)}
           name="name"
           value={this.state.a}
           onChange={this.onChange}

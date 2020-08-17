@@ -1,159 +1,48 @@
-import React, { useState, useContext, useReducer, useEffect } from 'react'
-import { Button } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons'
-{
-  /**useState */
-}
-const AddCount = () => {
-  const [count, setCount] = useState(0)
-  const addCount = () => {
-    let newCount = count
-    setCount((newCount += 1))
-  }
-  return (
-    <>
-      <p>{count}</p>
-      <Button onClick={addCount}>Count++</Button>
-    </>
-  )
-}
-// export default AddCount
+import React from "react";
+import ReactDOM from "react-dom";
 
-{
-  /**useContext */
-}
-const Test = () => {
-  const AppContext = React.createContext({})
-  const A = () => {
-    const { name } = useContext(AppContext)
-    return <p>我是A组件的名字{name}</p>
-  }
-  const B = () => {
-    const { name, toDo } = useContext(AppContext)
+import ProfilePageFunction from "./ProfilePageFunction";
+import ProfilePageClass from "./ProfilePageClass";
+
+export default class Index extends React.Component {
+  state = {
+    user: "Dan",
+  };
+  render() {
     return (
-      <p>
-        我是B组件的名字{name}，我要{toDo}
-      </p>
-    )
+      <>
+        <label>
+          <b>Choose profile to view: </b>
+          <select
+            value={this.state.user}
+            onChange={(e) => this.setState({ user: e.target.value })}
+          >
+            <option value="Dan">Dan</option>
+            <option value="Sophie">Sophie</option>
+            <option value="Sunil">Sunil</option>
+          </select>
+        </label>
+        <h1>Welcome to {this.state.user}’s profile!</h1>
+        <p>
+          <ProfilePageFunction user={this.state.user} />
+          <b> (function)</b>
+        </p>
+        <p>
+          <ProfilePageClass user={this.state.user} />
+          <b> (class)</b>
+        </p>
+        <p>Can you spot the difference in the behavior?</p>
+
+        <h3 style={{ color: "red" }}>
+          <p>结论:</p>
+          当使用 函数式组件 实现的 ProfilePage, 当前账号是 Dan 时点击 Follow
+          按钮，然后立马切换当前账号到 Sophie，弹出的文本将依旧是 'Followed
+          Dan'。
+          <p>
+            当使用 类组件 实现的 ProfilePage, 弹出的文本将是 'Followed Sophie'：
+          </p>
+        </h3>
+      </>
+    );
   }
-  return (
-    <AppContext.Provider value={{ name: 'hook', toDo: '测试' }}>
-      <A />
-      <B />
-    </AppContext.Provider>
-  )
 }
-// export default Test
-
-{
-  /**useReducer */
-}
-const TestUseReducer = () => {
-  const reducer = (state, action) => {
-    console.log(cc)
-    if (action.type === 'add') {
-      return {
-        ...state,
-        count: state.count + 1,
-      }
-    } else {
-      return state
-    }
-  }
-  const addCount = () => {
-    dispatch({
-      type: 'add',
-    })
-  }
-  const [state, dispatch] = useReducer(reducer, { count: 0 })
-  return (
-    <>
-      <p>{state.count}</p>
-      <Button onClick={addCount}>Count ++</Button>
-    </>
-  )
-}
-// export default TestUseReducer
-
-{
-  /**useEffect */
-}
-// const AsyncPage = () => {
-//     const [loading, setLoading] = useState(true);
-//     useEffect(() => {
-//         setTimeout(() => {
-//             setLoading(false);
-//         }, 5000);
-//     })
-//     return (loading ? <LoadingOutlined /> : '加载完成')
-// }
-// export default AsyncPage
-
-// const AsyncPage = ({ name }) => {
-//     const [loading, setLoading] = useState(true)
-//     const [person, setPerson] = useState({})
-
-//     useEffect(() => {
-//         setLoading(true)
-//         setTimeout(() => {
-//             setLoading(false)
-//             setPerson({ name })
-//         }, 2000)
-//     }, [name])
-//     return (
-//         <>
-//             {loading ? <p>Loading...</p> : <p>{person.name}</p>}
-//         </>
-//     )
-// }
-
-// const PersonPage = () => {
-//     const [state, setState] = useState('')
-//     const changeName = (name) => {
-//         setState(name)
-//     }
-//     return (
-//         <>
-//             <AsyncPage name={state} />
-//             <button onClick={() => { changeName('名字1') }}>名字1</button>
-//             <button onClick={() => { changeName('名字2') }}>名字2</button>
-//         </>
-//     )
-// }
-
-// export default PersonPage
-
-{
-  /**自定义hooks usePerson() */
-}
-const usePerson = (name) => {
-  const [loading, setLoading] = useState(true)
-  const [person, setPerson] = useState({})
-  useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      setPerson({ name })
-    }, 2000)
-  }, [name])
-  return [loading, person]
-}
-const AsyncPage = ({ name }) => {
-  const [loading, person] = usePerson(name)
-  return <>{loading ? <LoadingOutlined /> : <span>{person.name}</span>}</>
-}
-const PersonPage = () => {
-  const [name, setName] = useState('')
-  const changeName = (name) => {
-    setName(name)
-  }
-  return (
-    <>
-    啊啊啊啊
-      <AsyncPage name={name} />
-      <Button onClick={() => changeName('名字1')}>名字1</Button>
-      <Button onClick={() => changeName('名字2')}>名字2</Button>
-    </>
-  )
-}
-export default PersonPage
