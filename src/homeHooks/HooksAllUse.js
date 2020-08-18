@@ -1,82 +1,84 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
-import { Button } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-lone-blocks */
+/* eslint-disable react/prop-types */
+import React, {useState, useContext, useReducer, useEffect} from 'react';
+import {Button} from 'antd';
+import {LoadingOutlined} from '@ant-design/icons';
 {
-  /**useState */
+    /**useState */
 }
 const AddCount = () => {
-  const [count, setCount] = useState(0);
-  const addCount = () => {
-    let newCount = count;
-    setCount((newCount += 1));
-  };
-  return (
-    <>
-      <p>{count}</p>
-      <Button onClick={addCount}>Count++</Button>
-    </>
-  );
+    const [count, setCount] = useState(0);
+    const addCount = () => {
+        let newCount = count;
+        setCount((newCount += 1));
+    };
+    return (
+        <>
+            <p>{count}</p>
+            <Button onClick={addCount}>Count++</Button>
+        </>
+    );
 };
 // export default AddCount
 
 {
-  /**useContext */
+    /**useContext */
 }
 const Test = () => {
-  const AppContext = React.createContext({});
-  const A = () => {
-    const { name } = useContext(AppContext);
-    return <p>我是A组件的名字{name}</p>;
-  };
-  const B = () => {
-    const { name, toDo } = useContext(AppContext);
-    return (
-      <p>
+    const AppContext = React.createContext({});
+    const A = () => {
+        const {name} = useContext(AppContext);
+        return <p>我是A组件的名字{name}</p>;
+    };
+    const B = () => {
+        const {name, toDo} = useContext(AppContext);
+        return (
+            <p>
         我是B组件的名字{name}，我要{toDo}
-      </p>
+            </p>
+        );
+    };
+    return (
+        <AppContext.Provider value={{name: 'hook',
+            toDo: '测试'}}>
+            <A />
+            <B />
+        </AppContext.Provider>
     );
-  };
-  return (
-    <AppContext.Provider value={{ name: "hook", toDo: "测试" }}>
-      <A />
-      <B />
-    </AppContext.Provider>
-  );
 };
 // export default Test
 
 {
-  /**useReducer */
+    /**useReducer */
 }
 const TestUseReducer = () => {
-  const reducer = (state, action) => {
-    console.log(cc);
-    if (action.type === "add") {
-      return {
-        ...state,
-        count: state.count + 1,
-      };
-    } else {
-      return state;
-    }
-  };
-  const addCount = () => {
-    dispatch({
-      type: "add",
-    });
-  };
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
-  return (
-    <>
-      <p>{state.count}</p>
-      <Button onClick={addCount}>Count ++</Button>
-    </>
-  );
+    const reducer = (state, action) => {
+        if(action.type === 'add')
+            return {
+                ...state,
+                count: state.count + 1,
+            };
+     
+        return state;
+    };
+    const addCount = () => {
+        dispatch({
+            type: 'add',
+        });
+    };
+    const [state, dispatch] = useReducer(reducer, {count: 0});
+    return (
+        <>
+            <p>{state.count}</p>
+            <Button onClick={addCount}>Count ++</Button>
+        </>
+    );
 };
 // export default TestUseReducer
 
 {
-  /**useEffect */
+    /**useEffect */
 }
 // const AsyncPage = () => {
 //     const [loading, setLoading] = useState(true);
@@ -124,35 +126,35 @@ const TestUseReducer = () => {
 // export default PersonPage
 
 {
-  /**自定义hooks usePerson() */
+    /**自定义hooks usePerson() */
 }
-const usePerson = (name) => {
-  const [loading, setLoading] = useState(true);
-  const [person, setPerson] = useState({});
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setPerson({ name });
-    }, 2000);
-  }, [name]);
-  return [loading, person];
+const usePerson = name => {
+    const [loading, setLoading] = useState(true);
+    const [person, setPerson] = useState({});
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            setPerson({name});
+        }, 2000);
+    }, [name]);
+    return [loading, person];
 };
-const AsyncPage = ({ name }) => {
-  const [loading, person] = usePerson(name);
-  return <>{loading ? <LoadingOutlined /> : <span>{person.name}</span>}</>;
+const AsyncPage = ({name}) => {
+    const [loading, person] = usePerson(name);
+    return <>{loading ? <LoadingOutlined /> : <span>{person.name}</span>}</>;
 };
 const PersonPage = () => {
-  const [name, setName] = useState("");
-  const changeName = (name) => {
-    setName(name);
-  };
-  return (
-    <>
-      <AsyncPage name={name} />
-      <Button onClick={() => changeName("名字1")}>名字1</Button>
-      <Button onClick={() => changeName("名字2")}>名字2</Button>
-    </>
-  );
+    const [name, setName] = useState('');
+    const changeName = name => {
+        setName(name);
+    };
+    return (
+        <>
+            <AsyncPage name={name} />
+            <Button onClick={() => changeName('名字1')}>名字1</Button>
+            <Button onClick={() => changeName('名字2')}>名字2</Button>
+        </>
+    );
 };
 export default PersonPage;

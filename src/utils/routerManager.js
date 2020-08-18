@@ -1,14 +1,14 @@
 const stringFormat = (str, ...args) => {
-  if (typeof str !== "string")
-    throw new Error("Expected first argument to be a string");
-  return str.replace(/{(\d+)}/g, (match, index) =>
-    typeof args[index] === "undefined" ? match : args[index]
-  );
+    if(typeof str !== 'string')
+        throw new Error('Expected first argument to be a string');
+    return str.replace(/{(\d+)}/g, (match, index) =>
+        typeof args[index] === 'undefined' ? match : args[index]
+    );
 };
 
 const combineUrl = (pageUrl, url) => {
-  const pageUrlArray = pageUrl.split("/").filter((i) => i);
-  return pageUrlArray.length > 0 ? `/${pageUrlArray.join("/")}${url}` : url;
+    const pageUrlArray = pageUrl.split('/').filter(i => i);
+    return pageUrlArray.length > 0 ? `/${pageUrlArray.join('/')}${url}` : url;
 };
 
 /**
@@ -54,99 +54,97 @@ const combineUrl = (pageUrl, url) => {
  *      /:id -> /:id/detail -> /:id/detail/:detailId -> /:id/detail/:d_id/edit
  */
 export class Routes {
-  constructor(routes, pagePath) {
-      console.log('routes:',routes)
-    Object.defineProperty(this, "pageUrl", {
-      value: pagePath || "/",
-      writable: true,
-      enumerable: false,
-    });
-    Object.getOwnPropertyNames(routes).forEach((key) => {
-      this[key] = {
-        title: routes[key].title,
-        exact: routes[key].exact,
-        url: () => combineUrl(this.pageUrl, routes[key].url),
-        format: (...args) =>
-          combineUrl(
-            this.pageUrl,
-            routes[key].format
-              ? stringFormat(routes[key].format, ...args)
-              : routes[key].url
-          ),
-        component: () => {
-          return routes[key].component;
-        },
-      };
-    });
-  }
+    constructor(routes, pagePath) {
+        console.log('routes:', routes);
+        Object.defineProperty(this, 'pageUrl', {
+            value: pagePath || '/',
+            writable: true,
+            enumerable: false,
+        });
+        Object.getOwnPropertyNames(routes).forEach(key => {
+            this[key] = {
+                title: routes[key].title,
+                exact: routes[key].exact,
+                url: () => combineUrl(this.pageUrl, routes[key].url),
+                format: (...args) =>
+                    combineUrl(
+                        this.pageUrl,
+                        routes[key].format
+                            ? stringFormat(routes[key].format, ...args)
+                            : routes[key].url
+                    ),
+                component: () => routes[key].component,
+            };
+        });
+    }
 
-  setPageUrl(url) {
-    this.pageUrl = url;
-  }
+    setPageUrl(url) {
+        this.pageUrl = url;
+    }
 }
 
 const privateRoutes = {};
 
 class RouteManager {
-  // 在 bootstraper 方法内调用
-  setRoutes({ namespace, routes }) {
-    privateRoutes[namespace || "/"] = routes;
-  }
+    // 在 bootstraper 方法内调用
+    setRoutes({namespace, routes}) {
+        privateRoutes[namespace || '/'] = routes;
+    }
 
-  // 使用 Hash 路由模式时，通过解析 window.location 得到与 react-router 一致的 location
-  getLocation() {
-    const locationSplitArray = window.location.hash.split("?");
-    const location = {
-      pathname: locationSplitArray[0]
-        ? locationSplitArray[0].replace("#", "")
-        : "/",
-      search: locationSplitArray[1] ? `?${locationSplitArray[1]}` : "",
-    };
-    return location;
-  }
+    // 使用 Hash 路由模式时，通过解析 window.location 得到与 react-router 一致的 location
+    getLocation() {
+        const locationSplitArray = window.location.hash.split('?');
+        const location = {
+            pathname: locationSplitArray[0]
+                ? locationSplitArray[0].replace('#', '')
+                : '/',
+            search: locationSplitArray[1] ? `?${locationSplitArray[1]}` : '',
+        };
+        return location;
+    }
 
-  // 获取路由信息，不包含 menuPath 中的内容
-  getPagePath({ namespace, location = this.getLocation(), routes }) {
-    if (!routes) routes = privateRoutes[namespace || "/"];
-    const pathSnippets = location.pathname.split("/").filter((i) => i);
-    const urlArray = [];
-    pathSnippets.forEach((item, index) => {
-      const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
-      let flag = true; // 表示是否需要进行正则表达式校验
-      // 字符串相等校验
-      for (const key in routes) {
-        const title = routes[key].title;
-        if (routes[key].url() === url && title) {
-          urlArray.push({
-            url,
-            title,
-          });
-          flag = false; // 字符串匹配成功，无需正则表达式校验
-        }
-      }
-      // 正则表达式匹配
-      if (flag)
-        for (const key in routes) {
-          /*eslint-disable no-useless-escape */
-          const pattern = new RegExp(
-            `^${routes[key].url().replace(/:\w+/g, "([_. @&a-zA-Z0-9-]+)")}$`
-          );
-          const title = routes[key].title;
-          if (pattern.test(url) && title)
-            urlArray.push({
-              url,
-              title,
-            });
-        }
-    });
-    return urlArray;
-  }
+    // 获取路由信息，不包含 menuPath 中的内容
+    getPagePath({namespace, location = this.getLocation(), routes}) {
+        if(!routes) routes = privateRoutes[namespace || '/'];
+        const pathSnippets = location.pathname.split('/').filter(i => i);
+        const urlArray = [];
+        pathSnippets.forEach((item, index) => {
+            const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+            let flag = true; // 表示是否需要进行正则表达式校验
+            // 字符串相等校验
+            for(const key in routes) {
+                const title = routes[key].title;
+                if(routes[key].url() === url && title) {
+                    urlArray.push({
+                        url,
+                        title,
+                    });
+                    flag = false; // 字符串匹配成功，无需正则表达式校验
+                }
+            }
+            // 正则表达式匹配
+            if(flag)
+                for(const key in routes) {
+                    /*eslint-disable no-useless-escape */
+                    const pattern = new RegExp(
+                        `^${routes[key].url().replace(/:\w+/g, '([_. @&a-zA-Z0-9-]+)')}$`
+                    );
+                    const title = routes[key].title;
+                    if(pattern.test(url) && title)
+                        urlArray.push({
+                            url,
+                            title,
+                        });
+                }
+        });
+        return urlArray;
+    }
 
-  // 获取父级页面 url，是节点入口页则返回 '/'
-  getParentUrl(options) {
-    const paths = this.getPagePath(options || {});
-    return paths.length >= 2 ? paths[paths.length - 2].url : "/";
-  }
+    // 获取父级页面 url，是节点入口页则返回 '/'
+    getParentUrl(options) {
+        const paths = this.getPagePath(options || {});
+        return paths.length >= 2 ? paths[paths.length - 2].url : '/';
+    }
 }
 
 const routeManager = new RouteManager();

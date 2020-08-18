@@ -1,11 +1,12 @@
-import React from 'react'
+/* eslint-disable react/prefer-stateless-function */
+import React from 'react';
 
 export default class UserIndex extends React.Component {
-    render(){
+    render() {
         return (
             <div>
                 <p>UserIndex</p>
             </div>
-        )
+        );
     }
 }

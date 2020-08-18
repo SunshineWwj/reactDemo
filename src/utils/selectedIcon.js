@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react/display-name */
+import React from 'react';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -9,7 +10,7 @@ import {
     UploadOutlined,
 } from '@ant-design/icons';
 export default icon => {
-    switch (icon) {
+    switch(icon) {
         case 'AppleOutlined':
             return <AppleOutlined />;
         case 'WindowsOutlined':
@@ -25,4 +26,4 @@ export default icon => {
         default:
             return <UserOutlined />;
     }
-}
+};

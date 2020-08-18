@@ -1,5 +1,6 @@
-const path = require("path")
+/* eslint-disable func-names */
+const path = require('path');
 
-exports.resolve = function (dir) {
-    return path.resolve(__dirname, dir)
-}
+exports.resolve = function(dir) {
+    return path.resolve(__dirname, dir);
+};
