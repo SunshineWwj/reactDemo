@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
+    //配置生成Source Maps，选择合适的选项
+    devtool: 'eval-source-map', //这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。
     // 入口
     entry: {
         index: './src/index',
@@ -12,7 +14,7 @@ module.exports = {
     // 出口
     output: {
         path: utils.resolve('../dist'),
-        filename: 'static/js/[name].bundle.js', //[name]为入口名称index
+        filename: 'static/js/[name]-[hash].bundle.js', //[name]为入口名称index
         publicPath: '/', // 打包后的资源的访问路径前缀
     },
     // 模块
@@ -25,6 +27,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                // loader: 'style!css?modules!postcss', //!感叹号表示使同一文件能够使用不同类型的loader,  跟前面相比就在后面加上了?modules
                 use: ['style-loader', 'css-loader'] //一个是 CSS-loader 来读取 CSS 文件，另一个是 Style-loader 用来把 <style> 标签插入 HTML 页面。
             },
             {
@@ -49,6 +52,9 @@ module.exports = {
             },
         ],
     },
+    // postcss: [
+    //     require('autoprefixer')//调用autoprefixer插件
+    // ],
     resolve: {
     // 解析扩展能够使用户在引入模块时不带扩展：
     //import File from '../path/to/file'    。（当我们通过路导入文件，找不到改文件时，会尝试加入这些后缀继续寻找文件）
