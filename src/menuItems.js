@@ -32,7 +32,7 @@ export const menus = [
         icon: 'WindowsOutlined',
         items: [
             {
-                title: 'rexux',
+                title: 'redux',
                 pinyin: 'redux',
                 key: 'sm2-1',
                 url: '/reactRedux',
@@ -52,11 +52,29 @@ export const menus = [
                 url: '/tableQuery',
             },
             {
-                title: 'refs学习',
-                pinyin: 'refs',
+                title: '封装Input',
+                pinyin: 'inputs',
                 key: 'sm3-2',
-                url: '/refs',
+                url: '/inputs',
             },
+            {
+                title: '使用ref', //页面显示标题
+                pinyin: 'refs',
+                key: 'sm3-3',
+                url: '/refs', //浏览器显示路由，需和router里面匹配
+            },
+            {
+                title: 'refs转发', //页面显示标题
+                pinyin: 'refszhuanfa',
+                key: 'sm3-4',
+                url: '/refsForward', //浏览器显示路由，需和router里面匹配
+            },
+            {
+                title: 'HOC高阶组件', //页面显示标题
+                pinyin: 'hoc',
+                key: 'sm3-5',
+                url: '/hoc', //浏览器显示路由，需和router里面匹配
+            }
         ],
     },
     {

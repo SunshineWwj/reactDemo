@@ -5,8 +5,11 @@ import HooksAll from '../homeHooks/HooksAllUse';
 import ReactRedux from '../ReactRedux';
 import {Routes} from './routerManager';
 import TableQuery from '../TableQuery';
-import RefsDemo from '../RefsDemo';
+import OverrideInput from '../OverrideInput';
 import Test from '../TestJQuery';
+import RefsDemo from '../RefsDemo';
+import RefsForward from '../ForwardRef';
+import HOC from '../HOC';
 const routes = new Routes({
     hooks: {
         url: '/hooks',
@@ -33,10 +36,25 @@ const routes = new Routes({
         title: '表格',
         component: TableQuery,
     },
+    inputs: {
+        url: '/inputs',
+        title: '封装Input',
+        component: OverrideInput,
+    },
     refs: {
         url: '/refs',
-        title: 'ref学习',
+        title: '使用ref',
         component: RefsDemo,
+    },
+    refsForward: {
+        url: '/refsForward',
+        title: 'refs转发',
+        component: RefsForward,
+    },
+    hoc: {
+        url: '/hoc',
+        title: 'HOC高阶组件',
+        component: HOC,
     },
     test: {
         url: '/test',
