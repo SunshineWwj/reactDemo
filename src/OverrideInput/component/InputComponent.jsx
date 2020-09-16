@@ -6,8 +6,8 @@ export default class InputComponent extends React.Component {
   };
   onChange = e => {
       this.setState({value: e.target.value});
-      if(typeof this.props.onChange === 'function')
-          this.props.onChange(e.target.value, this.props.name);
+      if(typeof this.props.onBlur === 'function')
+          this.props.onBlur(e.target.value, this.props.name);
   };
   render() {
       const {onChange, onBlur, defaultValue, value, ...rest} = this.props;
@@ -16,7 +16,7 @@ export default class InputComponent extends React.Component {
               {...rest}
               type="text"
               value={this.state.value}
-              onChange={this.onChange}/>
+              onBlur={this.onChange}/>
       );
   }
 }

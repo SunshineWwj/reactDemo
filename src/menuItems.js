@@ -74,6 +74,18 @@ export const menus = [
                 pinyin: 'hoc',
                 key: 'sm3-5',
                 url: '/hoc', //浏览器显示路由，需和router里面匹配
+            },
+            {
+                title: 'Render Props', //页面显示标题
+                pinyin: 'renderprops',
+                key: 'sm3-6',
+                url: '/renderProps', //浏览器显示路由，需和router里面匹配
+            },
+            {
+                title: '五子棋',
+                pinyin: 'wuziqi',
+                key: 'sm3-7',
+                url: '/wuziqi'
             }
         ],
     },

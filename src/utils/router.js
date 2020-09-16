@@ -10,6 +10,8 @@ import Test from '../TestJQuery';
 import RefsDemo from '../RefsDemo';
 import RefsForward from '../ForwardRef';
 import HOC from '../HOC';
+import WZQGame from '../WZQGame';
+import RenderProps from '../RenderProps';
 const routes = new Routes({
     hooks: {
         url: '/hooks',
@@ -61,6 +63,16 @@ const routes = new Routes({
         title: '测试第三方库',
         component: Test,
     },
+    wzq: {
+        url: '/wuziqi',
+        title: '五子棋小游戏',
+        component: WZQGame
+    },
+    renderProps: {
+        url: '/renderProps',
+        title: '学习render props',
+        component: RenderProps
+    }
 });
 const routeKeys = Object.keys(routes);
 const routeValue = Object.values(routes);
