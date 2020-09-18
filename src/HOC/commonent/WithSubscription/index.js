@@ -15,7 +15,7 @@ const withSubscription = (WrappedComponent, selectData) =>
 
         componentDidMount() {
             // ……注意订阅数据……
-            // DataSource.addChangeListener(this.handleChange);
+            DataSource.addChangeListener(this.handleChange);
             console.log('this.state.data：', this.state.data);
             console.log('this.props:', this.props);
         }
