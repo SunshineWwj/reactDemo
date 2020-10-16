@@ -33,7 +33,7 @@ class Cat extends React.Component {
         const mouse = this.props.mouse;
         return (
             <img width="20" height="20"
-                src={require('./cat.jpg')}
+                src={require('../assets/img/icon_1.png')}
                 style={{position: 'absolute',
                     left: mouse.x,
                     top: mouse.y}} />

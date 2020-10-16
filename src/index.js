@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import ReactDom from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {
     Route,
@@ -14,7 +14,8 @@ import reducer from './store/reducer';
 import state from './store/state';
 import MenuPage from './Menu';
 import Hooks from '../src/homeHooks/index';
-const store = createStore(reducer, state);
+import thunkMiddleware from 'redux-thunk';
+const store = createStore(reducer, state, applyMiddleware(thunkMiddleware));
 class App extends React.Component {
     render() {
         return (

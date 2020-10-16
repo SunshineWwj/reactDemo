@@ -24,12 +24,15 @@ module.exports = webpackMerge(baseWebpackConfig, {
         compress: true, // 一切服务都启用gzip 压缩：
         port: '8081', // 指定端口号
         publicPath: '/', // 访问资源加前缀
+        before: app => {
+            console.log('cc:', app);
+        },
         proxy: {
             // 接口请求代理
             '/api': {
-                target: 'http://localhost:3003', //请求到 /api/data 现在会被代理到请求 http://localhost:3003/api/data
+                target: 'http://localhost:3001', //请求到 /api/list 现在会被代理到请求 http://localhost:3001/api/list
                 changeOrigin: true,
-                // 如果你不想请求路径中有/api ，则需要重写路径，此时请求到 /api/data 现在会被代理到请求 http://localhost:3003/data
+                // 如果你不想请求路径中有/api ，则需要重写路径，此时请求到 /api/list 现在会被代理到请求 http://localhost:3001/list
                 pathRewrite: {'^/api': ''},
                 secure: true, //接受https的代理
             },

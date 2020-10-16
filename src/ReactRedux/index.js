@@ -13,16 +13,17 @@ import PropTypes from 'prop-types';
 class storeTest extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.list);
         this.state = {
             fetchData: [],
         };
-        console.log('aaaa');
     }
     componentDidMount() {
-        fetch('/api/data')
+        fetch('/api/list')
             .then(res => res.json())
-            .then(data => this.setState({fetchData: data}));
+            .then(data => {
+                console.log('data:', data);
+                this.setState({fetchData: data.data});
+            });
     }
     render() {
         return (
@@ -74,7 +75,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     increment: () => dispatch(increment()),
     decrement: () => dispatch(decrement()),
-    addList: () => dispatch(addList()),
+    addList: () => (addList()),
     addTodo: () => dispatch(addTodo()),
     deleteTodo: index => dispatch(deleteTodo(index)),
 });

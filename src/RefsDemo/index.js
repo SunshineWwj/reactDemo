@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-return-assign */

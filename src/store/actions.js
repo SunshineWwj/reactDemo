@@ -11,18 +11,18 @@ export const decrement = () => ({
     num: 20,
 });
 
-export const addList = () => {
+const getListEnd = data => ({
+    type: 'ADDLIST',
+    list: data
+});
+export const addList = dispatch => {
     count++;
-    fetch('/api/data')
+    fetch('/api/list')
         .then(res => res.json())
-        .then(data => {
-            if(data)
-                return {
-                    type: 'ADDLIST',
-                    data: {
-                        list: data,
-                    },
-                };
+        .then(res => {
+            if(res.data)
+                dispatch(getListEnd(res.data));
+            return res;
         });
 };
 export const addTodo = () => {

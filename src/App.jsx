@@ -5,7 +5,10 @@ import routes from './utils/router';
 
 class App extends React.Component {
     componentDidMount() {
-        console.log(routes);
+        this.callAPI();
+    }
+    callAPI=() => {
+        fetch('http://localhost:3001/testApi').then(res => res.text()).then(res => console.log('aa:', res));
     }
     render() {
         return (
