@@ -86,6 +86,12 @@ export const menus = [
                 pinyin: 'wuziqi',
                 key: 'sm3-7',
                 url: '/wuziqi'
+            },
+            {
+                title: '高性能表格',
+                pinyin: 'gxnbg',
+                key: 'sm3-8',
+                url: '/fixedDataTable'
             }
         ],
     },

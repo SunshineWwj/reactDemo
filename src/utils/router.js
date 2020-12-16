@@ -12,6 +12,7 @@ import RefsForward from '../ForwardRef';
 import HOC from '../HOC';
 import WZQGame from '../WZQGame';
 import RenderProps from '../RenderProps';
+import FixedDataTable from '../FixedDataTable';
 const routes = new Routes({
     hooks: {
         url: '/hooks',
@@ -72,6 +73,11 @@ const routes = new Routes({
         url: '/renderProps',
         title: '学习render props',
         component: RenderProps
+    },
+    fixedDataTable: {
+        url: '/fixedDataTable',
+        title: 'FixedDataTable',
+        component: FixedDataTable
     }
 });
 const routeKeys = Object.keys(routes);
