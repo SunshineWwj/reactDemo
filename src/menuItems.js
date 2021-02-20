@@ -18,9 +18,15 @@ export const menus = [
                 url: '/hooksUse', //浏览器中显示的路由
             },
             {
+                title: 'Hooks-useReducer+context',
+                pinyin: 'Hooks基本使用',
+                key: 'sm1-3',
+                url: '/counter', //浏览器中显示的路由
+            },
+            {
                 title: '评分',
                 pinyin: 'pingfen',
-                key: 'sm1-3',
+                key: 'sm1-4',
                 url: '/rate',
             },
         ],

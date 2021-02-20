@@ -12,6 +12,7 @@ import RefsForward from '../ForwardRef';
 import HOC from '../HOC';
 import WZQGame from '../WZQGame';
 import RenderProps from '../RenderProps';
+import useHooksToCount from '../useHooksToCount/count';
 import FixedDataTable from '../FixedDataTable';
 const routes = new Routes({
     hooks: {
@@ -23,6 +24,11 @@ const routes = new Routes({
         url: '/hooksUse',
         title: 'Hooks基本使用',
         component: HooksAll,
+    },
+    counter: {
+        url: '/counter',
+        title: 'Hooks+useReducer+context',
+        component: useHooksToCount,
     },
     rate: {
         url: '/rate',
