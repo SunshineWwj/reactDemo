@@ -14,6 +14,7 @@ import WZQGame from '../WZQGame';
 import RenderProps from '../RenderProps';
 import useHooksToCount from '../useHooksToCount/count';
 import FixedDataTable from '../FixedDataTable';
+import PureComponents from '../PureComponents';
 const routes = new Routes({
     hooks: {
         url: '/hooks',
@@ -84,6 +85,11 @@ const routes = new Routes({
         url: '/fixedDataTable',
         title: 'FixedDataTable',
         component: FixedDataTable
+    },
+    pureComponents: {
+        url: '/pureComponents',
+        title: 'PureComponents',
+        component: PureComponents
     }
 });
 const routeKeys = Object.keys(routes);

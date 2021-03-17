@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react/prop-types */
-import React, {useState, useContext, useReducer, useEffect} from 'react';
+import React, {useState, useContext, useReducer, useEffect, useRef} from 'react';
 import {Button} from 'antd';
 import {LoadingOutlined} from '@ant-design/icons';
 {
@@ -157,4 +157,50 @@ const PersonPage = () => {
         </>
     );
 };
-export default PersonPage;
+// export default PersonPage;
+
+const useRefDom = () => {
+    const [count, setCount] = useState(0);
+    const [count1, setCount1] = useState(0);
+    const numRef = useRef(count);
+
+    //会记录每一个的值
+    useEffect(() => {
+        console.log('count:', count);
+        numRef.current = count;
+    }, [count]);
+
+    useEffect(() => {
+        console.log('count1:', count1);
+    }, [count1]);
+
+    const expensive = () => {
+        console.log('do expensive');
+        let sum = 0;
+        for(let index = 0; index < count * 2; index++)
+            sum += index;
+        
+        return sum;
+    };
+
+    
+    return (
+        <div>
+            <h2>{numRef.current}</h2>
+            {count}
+            <Button onClick={() => setCount(count + 10)}>+10</Button>
+            {count1}
+            <Button onClick={() => setCount1(count1 - 10)}>-10</Button>
+            <h2 style={{color: 'red'}}>
+                当我们点击加的时候numRef.current的值一直没变
+                因为useRef返回的值在整个生命周期不会改变
+            </h2>
+
+
+            {expensive()}
+        </div>
+    );
+};
+
+
+export default useRefDom;

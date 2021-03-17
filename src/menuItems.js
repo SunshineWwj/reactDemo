@@ -98,6 +98,12 @@ export const menus = [
                 pinyin: 'gxnbg',
                 key: 'sm3-8',
                 url: '/fixedDataTable'
+            },
+            {
+                title: 'Pure Component和Component',
+                pinyin: 'gxnbg',
+                key: 'sm3-9',
+                url: '/pureComponents'
             }
         ],
     },
