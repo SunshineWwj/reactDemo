@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react/prop-types */
@@ -171,33 +172,36 @@ const useRefDom = () => {
     }, [count]);
 
     useEffect(() => {
-        console.log('count1:', count1);
+        console.log('111');
+        return function() {
+            console.log('2222');
+        };
     }, [count1]);
 
-    const expensive = () => {
-        console.log('do expensive');
-        let sum = 0;
-        for(let index = 0; index < count * 2; index++)
-            sum += index;
+    // const expensive = () => {
+    //     console.log('do expensive');
+    //     let sum = 0;
+    //     for(let index = 0; index < count * 2; index++)
+    //         sum += index;
         
-        return sum;
-    };
+    //     return sum;
+    // };
 
     
     return (
         <div>
             <h2>{numRef.current}</h2>
             {count}
-            <Button onClick={() => setCount(count + 10)}>+10</Button>
+            <Button onClick={() => setCount(count + 10)}>+10</Button><br/>
             {count1}
-            <Button onClick={() => setCount1(count1 - 10)}>-10</Button>
+            <Button onClick={() => setCount1(10)}>-10</Button>
             <h2 style={{color: 'red'}}>
                 当我们点击加的时候numRef.current的值一直没变
                 因为useRef返回的值在整个生命周期不会改变
             </h2>
 
 
-            {expensive()}
+            {/* {expensive()} */}
         </div>
     );
 };

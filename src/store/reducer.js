@@ -19,7 +19,7 @@ const todoList = (state = initState, action) => {
         case 'ADDLIST':
             return action.data.list;
         case 'ADD_TODO':
-            return state.concat(action.data);
+            return [...action.data, ...state];
         case 'DELETE_TODO':
             return state.filter(list => list.id !== action.data);
         default:

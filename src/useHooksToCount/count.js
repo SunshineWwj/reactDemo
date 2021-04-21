@@ -6,6 +6,7 @@ import React, {useState, useEffect, useReducer} from 'react';
 import {defaultState, CounterReducer} from './hooksReducer';
 import SubComponent from './subComponent';
 import {CounterContext} from './context';
+import {Button} from 'antd';
 
 // function useWindowWidth() {
 //     const [width, setWidth] = useState(window.innerWidth);
@@ -48,6 +49,18 @@ export default function Counter() {
     const [state, dispatch] = useReducer(CounterReducer, defaultState);
     const countReducer = useReducer(CounterReducer, defaultState);
     console.log('countReducer:', countReducer);
+    const [info, setInfo] = useState({name: 'www',
+        age: 25});
+    const changeInfo = () => {
+        setInfo({
+            name: 'aaaa',
+            age: 26
+        });
+        setInfo({
+            name: 'bbb',
+            age: 26
+        });
+    };
     return (
         <CounterContext.Provider value={{state,
             dispatch}}>
@@ -71,7 +84,8 @@ export default function Counter() {
 
                 <SubComponent></SubComponent>
 
-
+                <Button onClick={changeInfo}>点击改变</Button>
+                <h1>{info.name}</h1>
             </div>
         </CounterContext.Provider>
     );
